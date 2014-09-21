@@ -1,0 +1,29 @@
+package album
+@grails.validation.Validateable(nullable=true)
+
+class PictureRangeCommand{
+	@org.grails.databinding.BindingFormat('YYYY-MM-dd mm:ss')
+	Date startTime
+	@org.grails.databinding.BindingFormat('YYYY-MM-dd mm:ss')
+	Date endTime
+
+	static constraints = {
+		startTime nullable: true,  validator: { val, obj -> 
+			if(val!=null){
+				if(obj.endTime){
+					if(val >= obj.endTime)return ['startTimeAfterEndTime']
+				}
+			}
+		}
+		endTime nullable: true, validator: { val, obj ->
+			if(val!=null){
+				if(obj.startTime){
+					println val 
+					println obj.startTime
+					println (val  <= obj.startTime)
+					if(val  <= obj.startTime)return ['endTimeBeforeStartTime']
+				}
+			}
+		}
+	}
+}

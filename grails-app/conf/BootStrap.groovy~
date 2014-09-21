@@ -1,0 +1,13 @@
+import album.*
+
+class BootStrap {
+
+    def init = { servletContext ->
+
+		(0..10).each{
+			new Picture().save(failOnError: true)
+		}
+    }
+    def destroy = {
+    }
+}

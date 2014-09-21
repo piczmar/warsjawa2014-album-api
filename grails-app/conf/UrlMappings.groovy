@@ -12,7 +12,9 @@ class UrlMappings {
 		}
 		"/comments"(resources: "comment")
 		
-
+		"/v1/stats"(namespace: "v1", controller: "stats")
+		"/v2/stats"(namespace: "v2", controller: "stats")
+		
         "/"(view:"/index")
         "500"(view:'/error')
 	}

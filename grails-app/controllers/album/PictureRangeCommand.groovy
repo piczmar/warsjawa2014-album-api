@@ -1,6 +1,5 @@
 package album
 @grails.validation.Validateable(nullable=true)
-
 class PictureRangeCommand{
 	@org.grails.databinding.BindingFormat('yyyy-MM-dd hh:mm:ss')
 	Date startTime

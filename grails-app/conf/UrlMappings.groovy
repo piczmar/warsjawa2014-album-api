@@ -6,9 +6,12 @@ class UrlMappings {
                 // apply constraints here
             }
         }
-
-		"/pictures"(resources: "picture")
-
+		"/pictures/lucky" (controller: "picture", action: "lucky", method: "GET")
+		"/pictures"(resources: "picture"){
+			"/comments"(resources: "comment")
+		}
+		"/comments"(resources: "comment")
+		
 
         "/"(view:"/index")
         "500"(view:'/error')

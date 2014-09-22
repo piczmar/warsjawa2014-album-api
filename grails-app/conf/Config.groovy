@@ -115,3 +115,50 @@ log4j.main = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+
+// Added by the Spring Security Core plugin:
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'album.security.User'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'album.security.UserRole'
+grails.plugin.springsecurity.authority.className = 'album.security.Role'
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+	'/':                              ['permitAll'],
+	'/index':                         ['permitAll'],
+	'/index.gsp':                     ['permitAll'],
+	'/assets/**':                     ['permitAll'],
+	'/**/js/**':                      ['permitAll'],
+	'/**/css/**':                     ['permitAll'],
+	'/**/images/**':                  ['permitAll'],
+	'/**/favicon.ico':                ['permitAll']
+]
+
+grails.plugin.springsecurity.securityConfigType = "InterceptUrlMap"
+grails.plugin.springsecurity.interceptUrlMap = [
+   '/pictures/**':  ['IS_AUTHENTICATED_FULLY'],
+   '/stats':    	['ROLE_ADMIN'],
+   '/**':           ['permitAll']
+]
+
+/* This is not yet supported, a reported bug https://jira.grails.org/browse/GPSPRINGSECURITYCORE-206
+   but httpMethod security is supported on @Secured annotations
+ grails.plugin.springsecurity.interceptUrlMap = [
+	[pattern :'/pictures',access:['ROLA_ADMIN'],httpMethod:'DELETE'],
+	[pattern: '/pictures/**', access:   ['IS_AUTHENTICATED_FULLY']],
+	[pattern: '/stats', access:    	['ROLE_ADMIN']],
+	[pattern: '/**', access:           ['permitAll']]
+]
+ */
+grails.plugin.springsecurity.rest.login.active=true
+grails.plugin.springsecurity.rest.login.endpointUrl='/api/login'
+grails.plugin.springsecurity.rest.login.failureStatusCode=401
+grails.plugin.springsecurity.rest.login.useJsonCredentials=true
+grails.plugin.springsecurity.rest.login.usernamePropertyName='username'
+grails.plugin.springsecurity.rest.login.passwordPropertyName='password'
+grails.plugin.springsecurity.rest.logout.endpointUrl='/api/logout'
+grails.plugin.springsecurity.rest.token.validation.useBearerToken=false
+grails.plugin.springsecurity.rest.token.validation.headerName='X-Auth-Token'
+grails.plugin.springsecurity.rest.token.storage.useGorm=false
+grails.plugin.springsecurity.rest.token.storage.gorm.tokenDomainClassName='album.security.AuthenticationToken'
+grails.plugin.springsecurity.rest.token.storage.gorm.tokenValuePropertyName='tokenValue'
+grails.plugin.springsecurity.rest.token.storage.gorm.usernamePropertyName='username'
+grails.plugin.springsecurity.rest.token.validation.active=true

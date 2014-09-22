@@ -4,7 +4,6 @@ import grails.rest.*
 @Resource(uri="/pictures",  formats=['json', 'xml'])
 class Picture {
 	Long id
-	String url = "http://some.dummy.url"
 	String title
 	Date dateCreated
 	Date lastUpdated
@@ -26,9 +25,9 @@ class Picture {
 	static String filename(long id) {
         "${id}.jpeg"
     }
-
+	static transients = [ "url" ]
 	// This way we make 'url' field readonly
 	String getUrl(){
-		url
+		"http://some.dummy.url"
 	}
 }
